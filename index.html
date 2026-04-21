@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<title>Portfolio — Maïlys Honorien</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,400&family=DM+Serif+Display&family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --c-cream: #FEFFCD;
+  --c-lavender: #BCC2F4;
+  --c-olive: #B0BC68;
+  --c-pink: #F7BAD1;
+  --c-ink: #2a2438;
+  --c-pink-deep: #e890b5;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--c-cream); color: var(--c-ink); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+body { min-height: 100vh; }
+
+/* ============= TOP NAV ============= */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; z-index: 1000;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+.nav > * { pointer-events: auto; }
+.nav a, .nav .navlink {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--c-pink);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.nav a:hover { transform: translateY(-2px) rotate(-2deg); color: #fff; }
+.nav .logo {
+  font-family: 'Parisienne', cursive;
+  font-size: 28px;
+  color: var(--c-pink);
+}
+
+/* ============= PAGE 1 — LANDING ============= */
+.page-landing {
+  min-height: 100vh;
+  position: relative;
+  padding: 120px 80px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.landing-title {
+  font-family: 'Parisienne', cursive;
+  font-size: clamp(120px, 22vw, 340px);
+  line-height: 0.85;
+  font-weight: 400;
+  color: var(--c-pink);
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 2;
+  margin-top: 40px;
+}
+.landing-title .p-letter {
+  font-size: 1.4em;
+  display: inline-block;
+  transform: translateY(0.08em);
+  color: var(--c-lavender);
+  text-shadow: 3px 3px 0 var(--c-pink);
+}
+.landing-sub {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 34px;
+  color: var(--c-pink-deep);
+  margin-top: 8px;
+  margin-left: 80px;
+  z-index: 2;
+  position: relative;
+}
+.landing-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 2;
+  position: relative;
+  font-family: 'Fraunces', serif;
+  color: var(--c-pink);
+}
+.landing-footer .year { font-size: 40px; font-style: italic; }
+.landing-footer .name { font-size: 28px; text-align: right; letter-spacing: 0.2em; text-transform: uppercase; }
+.landing-footer .name span { display: block; font-family: 'Parisienne', cursive; font-size: 40px; text-transform: none; letter-spacing: 0; color: var(--c-lavender); }
+
+/* Lys cutout on right edge */
+.orchid-stage {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 38vw;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.orchid-stage img {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%);
+  height: 90%;
+  width: auto;
+  max-width: none;
+  filter: drop-shadow(0 20px 40px rgba(247,186,209,0.35));
+  animation: lysFloat 7s ease-in-out infinite;
+}
+@keyframes lysFloat {
+  0%, 100% { transform: translateY(-50%) rotate(0deg); }
+  50% { transform: translateY(calc(-50% - 12px)) rotate(-1.5deg); }
+}
+/* Frame border — like sketch */
+.page-landing::before {
+  content: "";
+  position: absolute;
+  inset: 32px;
+  border: 3px solid var(--c-pink);
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--c-lavender);
+  font-size: 20px;
+  animation: bob 2.2s ease-in-out infinite;
+  z-index: 5;
+}
+@keyframes bob { 0%,100% { transform: translate(-50%,0); } 50% { transform: translate(-50%,10px); } }
+
+/* ============= PAGE 2 — MENU ============= */
+.page-menu {
+  min-height: 100vh;
+  padding: 120px 80px 80px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+/* Orchid cutout on left edge — mirrors the lys on landing */
+.orchid-stage-left {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 32vw;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.orchid-stage-left img {
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  transform: translateY(-50%);
+  height: 85%;
+  width: auto;
+  max-width: none;
+  filter: drop-shadow(0 20px 40px rgba(247,186,209,0.4));
+  animation: orchidFloat 7s ease-in-out infinite;
+}
+@keyframes orchidFloat {
+  0%, 100% { transform: translateY(-50%) rotate(0deg); }
+  50% { transform: translateY(calc(-50% - 14px)) rotate(1.5deg); }
+}
+.menu-label, .menu-stage, .menu-caption { z-index: 2; }
+.menu-stage {
+  position: relative;
+  width: 560px;
+  height: 560px;
+}
+.menu-label {
+  position: absolute;
+  left: -260px;
+  top: 60px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 26px;
+  color: var(--c-pink);
+  line-height: 1.8;
+  width: 240px;
+}
+.menu-label h3 {
+  font-family: 'Parisienne', cursive;
+  font-size: 48px;
+  color: var(--c-pink-deep);
+  margin-bottom: 20px;
+  font-weight: 400;
+  font-style: normal;
+}
+.menu-label ol { list-style: none; counter-reset: menu; }
+.menu-label li {
+  counter-increment: menu;
+  padding: 4px 0;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.menu-label li::before {
+  content: counter(menu) ".";
+  color: var(--c-lavender);
+  margin-right: 8px;
+  font-weight: 700;
+}
+.menu-label li:hover { color: var(--c-olive); transform: translateX(6px); }
+
+/* Keychain (porte-clé) */
+.astro {
+  position: absolute;
+  inset: 0;
+  transform-origin: center;
+}
+.astro-piece {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: 50% -10px; /* pivot near the grommet so tags swing from the ring */
+  transition: transform 0.7s cubic-bezier(.34,1.56,.64,1), filter 0.7s;
+  cursor: pointer;
+}
+.astro-piece img, .astro-piece .placeholder {
+  width: 150px;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18), 0 0 0 2px rgba(255,255,255,0.6) inset;
+  display: block;
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+/* little metal grommet at the top of each tag */
+.astro-piece::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border: 3px solid var(--c-pink-deep);
+  border-radius: 50%;
+  background: var(--c-cream);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2), inset 0 1px 2px rgba(0,0,0,0.15);
+  z-index: 2;
+}
+/* chain/string from grommet up into the ring */
+.astro-piece::after {
+  content: "";
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 16px;
+  background: linear-gradient(180deg, var(--c-pink-deep), var(--c-pink));
+  border-radius: 2px;
+  z-index: 1;
+}
+.astro-piece .label {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  background: rgba(0,0,0,0.55);
+  padding: 4px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.astro-piece:hover .label { opacity: 1; }
+.astro-piece:hover img, .astro-piece:hover .placeholder {
+  transform: scale(1.06);
+  box-shadow: 0 24px 50px rgba(0,0,0,0.28), 0 0 0 2px rgba(255,255,255,0.8) inset;
+}
+
+/* the keychain ring — star shape */
+.astro-head {
+  width: 150px; height: 150px;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  background: radial-gradient(circle at 35% 30%, #fbd7e3 0%, var(--c-pink) 45%, #cc7ba0 100%);
+  left: 50%; top: 0;
+  transform: translate(-50%, 0);
+  z-index: 4;
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,0.22));
+  position: absolute;
+}
+/* hole in the middle of the star */
+.astro-head::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 48%;
+  transform: translate(-50%, -50%);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--c-cream);
+  box-shadow:
+    inset 3px 3px 6px rgba(0,0,0,0.28),
+    inset -2px -2px 4px rgba(255,255,255,0.6);
+}
+/* clasp hidden on the star */
+.astro-head::after {
+  display: none;
+}
+
+/* default — tags bundled below the ring like stacked keys */
+.piece-1 { transform: translate(calc(-50% - 44px), calc(-50% - 30px)) rotate(-14deg); z-index: 1; }
+.piece-2 { transform: translate(calc(-50% - 20px), calc(-50% - 30px)) rotate(-6deg); z-index: 2; }
+.piece-3 { transform: translate(-50%, calc(-50% - 30px)) rotate(0deg); z-index: 3; }
+.piece-4 { transform: translate(calc(-50% + 20px), calc(-50% - 30px)) rotate(6deg); z-index: 2; }
+.piece-5 { transform: translate(calc(-50% + 44px), calc(-50% - 30px)) rotate(14deg); z-index: 1; }
+
+/* hover — tags fan around the ring in a semi-circle */
+.astro.hover .piece-1 { transform: translate(calc(-50% - 158px), calc(-50% - 118px)) rotate(32deg); z-index: 5; }
+.astro.hover .piece-2 { transform: translate(calc(-50% - 92px), calc(-50% - 52px)) rotate(16deg); z-index: 5; }
+.astro.hover .piece-3 { transform: translate(-50%, calc(-50% - 28px)) rotate(0deg); z-index: 5; }
+.astro.hover .piece-4 { transform: translate(calc(-50% + 92px), calc(-50% - 52px)) rotate(-16deg); z-index: 5; }
+.astro.hover .piece-5 { transform: translate(calc(-50% + 158px), calc(-50% - 118px)) rotate(-32deg); z-index: 5; }
+
+.piece-1 img, .piece-1 .placeholder { background: var(--c-lavender); }
+.piece-2 img, .piece-2 .placeholder { background: var(--c-pink); }
+.piece-3 img, .piece-3 .placeholder { background: var(--c-olive); }
+.piece-4 img, .piece-4 .placeholder { background: var(--c-pink-deep); }
+.piece-5 img, .piece-5 .placeholder { background: var(--c-lavender); }
+
+.menu-caption {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--c-lavender);
+  font-size: 24px;
+  animation: bob 2.2s ease-in-out infinite;
+}
+
+/* ============= SECTION HEADERS ============= */
+.section-label {
+  font-family: 'Caveat', cursive;
+  font-size: 32px;
+  color: var(--c-olive);
+  padding: 40px 80px 0;
+  transform: rotate(-2deg);
+}
+
+/* ============= PAGE 3 — À PROPOS ============= */
+.page-about {
+  min-height: 100vh;
+  padding: 100px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+}
+.polaroid-stack {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  perspective: 1200px;
+}
+.polaroid {
+  position: absolute;
+  width: 340px;
+  height: 420px;
+  background: #fffef0;
+  padding: 20px 20px 70px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  transition: transform 0.6s cubic-bezier(.34,1.56,.64,1);
+  cursor: grab;
+}
+.polaroid img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.polaroid .caption {
+  position: absolute;
+  bottom: 20px; left: 0; right: 0;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 26px;
+  color: var(--c-ink);
+}
+.polaroid:nth-child(1) {
+  left: 10%; top: 30px;
+  transform: rotate(-8deg);
+  z-index: 2;
+}
+.polaroid:nth-child(2) {
+  left: 30%; top: 80px;
+  transform: rotate(6deg);
+  z-index: 1;
+}
+.polaroid.slide-left { transform: rotate(-14deg) translateX(-40px) translateY(-20px); }
+.polaroid.slide-right { transform: rotate(14deg) translateX(40px) translateY(-10px); z-index: 5; }
+.polaroid .sticker {
+  position: absolute;
+  top: -20px; right: -20px;
+  width: 80px; height: 80px;
+  z-index: 3;
+  animation: spin 12s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.about-text {
+  position: relative;
+}
+.about-text h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 120px;
+  line-height: 0.9;
+  color: var(--c-pink-deep);
+  font-weight: 400;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.about-text h2 .big-a {
+  font-family: 'DM Serif Display', serif;
+  font-size: 180px;
+  color: var(--c-pink);
+  line-height: 0.8;
+}
+.about-text .bio {
+  border: 2.5px solid var(--c-pink);
+  padding: 28px 32px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--c-ink);
+  background: rgba(188,194,244,0.15);
+  border-radius: 4px;
+  position: relative;
+}
+.about-text .bio strong { color: var(--c-olive); font-weight: 600; }
+.about-text .bio::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border: 1.5px dashed var(--c-lavender);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* ============= PAGE 4 — PRINT SCOLAIRES ============= */
+.page-print {
+  min-height: 100vh;
+  padding: 80px 0 120px;
+  position: relative;
+  overflow: hidden;
+}
+.print-track {
+  display: flex;
+  gap: 40px;
+  padding: 60px 80px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.print-track::-webkit-scrollbar { display: none; }
+.print-card {
+  flex: 0 0 auto;
+  width: 340px;
+  height: 480px;
+  scroll-snap-align: center;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(.34,1.56,.64,1);
+}
+.print-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  transition: all 0.5s;
+}
+.print-card:hover { transform: translateY(-14px) scale(1.03); }
+.print-card:hover img { box-shadow: 0 40px 80px rgba(0,0,0,0.3); }
+.print-card .meta {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--c-pink-deep);
+}
+.print-card .meta b { font-style: normal; font-weight: 700; color: var(--c-ink); display: block; font-size: 16px; }
+
+/* horizontal scroll arrows (photography section) */
+.track-wrap { position: relative; }
+.track-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--c-pink);
+  color: #fff;
+  border: none;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  font-size: 34px;
+  font-family: 'Fraunces', serif;
+  line-height: 46px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.track-arrow:hover { background: var(--c-pink-deep); transform: translateY(-50%) scale(1.08); }
+.track-arrow:active { transform: translateY(-50%) scale(0.96); }
+.track-arrow-left { left: 24px; }
+.track-arrow-right { right: 24px; }
+
+/* ============= PAGE 5 — BOOK (Print persos) ============= */
+.page-book {
+  min-height: 100vh;
+  padding: 100px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, var(--c-cream) 0%, #fff5df 100%);
+}
+.book {
+  width: 820px;
+  height: 560px;
+  position: relative;
+  perspective: 2000px;
+}
+.book-spine {
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: rgba(42,36,56,0.2);
+  transform: translateX(-50%);
+  z-index: 5;
+}
+.book-page {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 50%;
+  background: #fffef0;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+.book-page.left { left: 0; }
+.book-page.right {
+  right: 0;
+  transform-origin: left center;
+  transition: transform 1s cubic-bezier(.45,.05,.55,.95);
+  cursor: pointer;
+  z-index: 2;
+}
+.book-page.right.flipped { transform: rotateY(-170deg); }
+.book-page img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.book-page .back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  background: #fffef0;
+}
+.book-page .front { backface-visibility: hidden; }
+.book-page .front img { position: absolute; inset: 0; }
+.book-page .back img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.book-label {
+  position: absolute;
+  font-family: 'Parisienne', cursive;
+  color: var(--c-pink);
+  font-size: 44px;
+  top: 24px; left: 24px;
+  z-index: 3;
+  pointer-events: none;
+}
+.book-label.right { left: auto; right: 24px; }
+.book-hint {
+  margin-top: 48px;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--c-lavender);
+  font-size: 22px;
+}
+.book-nav {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+}
+.book-nav button {
+  background: var(--c-lavender);
+  border: none;
+  color: var(--c-ink);
+  padding: 10px 22px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 16px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.book-nav button:hover { background: var(--c-pink); transform: translateY(-2px); }
+.book-nav button:disabled { opacity: 0.3; cursor: not-allowed; transform: none; background: var(--c-lavender); }
+.book-index {
+  margin-top: 16px;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--c-pink-deep);
+  font-size: 14px;
+  letter-spacing: 0.2em;
+}
+
+/* ============= PAGE 6 — TSHIRTS ============= */
+.page-tshirts {
+  min-height: 100vh;
+  padding: 100px 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.tshirt {
+  position: relative;
+  width: 572px;
+  transition: transform 0.6s cubic-bezier(.34,1.56,.64,1);
+  cursor: zoom-in;
+}
+.tshirt img {
+  width: 100%;
+  display: block;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+  transition: transform 0.4s;
+}
+.tshirt:hover { transform: translateY(-12px) rotate(-2deg); }
+.tshirt:hover img { transform: rotate(2deg); }
+.tshirt .tag {
+  position: absolute;
+  top: 100%; left: 50%;
+  transform: translateX(-50%);
+  margin-top: 12px;
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
+  color: var(--c-olive);
+  white-space: nowrap;
+}
+.tshirt:nth-child(1) { transform: rotate(-3deg); }
+.tshirt:nth-child(2) { transform: translateY(-24px); }
+.tshirt:nth-child(3) { transform: rotate(3deg); }
+.tshirt:nth-child(1):hover { transform: translateY(-12px) rotate(-5deg); }
+.tshirt:nth-child(2):hover { transform: translateY(-36px); }
+.tshirt:nth-child(3):hover { transform: translateY(-12px) rotate(5deg); }
+
+/* ============= PAGE 7/8 — GOYACHA ============= */
+.page-goyacha {
+  min-height: 100vh;
+  padding: 100px 80px;
+  position: relative;
+  background: linear-gradient(160deg, #fff 0%, #f0fff0 60%, #fff 100%);
+}
+.goyacha-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+.goya-hero {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  aspect-ratio: 3/4;
+  background: #136733;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(19,103,51,0.3);
+  transform: rotate(-2deg);
+  transition: transform 0.5s;
+}
+.goya-hero:hover { transform: rotate(0deg) scale(1.02); }
+.goya-hero img { width: 100%; height: 100%; object-fit: cover; }
+.goya-hero .tag {
+  position: absolute;
+  top: 20px; left: 20px;
+  font-family: 'Fraunces', serif;
+  color: #FFCAEB;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+}
+
+.goya-mockup {
+  aspect-ratio: 4/5;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  transition: transform 0.5s;
+}
+.goya-mockup img { width: 100%; height: 100%; object-fit: cover; }
+.goya-mockup:hover { transform: translateY(-8px) rotate(2deg); }
+.goya-mockup:nth-of-type(2) { transform: rotate(1deg); }
+.goya-mockup:nth-of-type(3) { transform: rotate(-1deg); }
+
+.goya-text {
+  grid-column: 1 / 4;
+  margin-top: 60px;
+  border: 2px solid #136733;
+  padding: 32px;
+  background: rgba(255,202,235,0.3);
+  border-radius: 4px;
+  position: relative;
+}
+.goya-text h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 56px;
+  color: #136733;
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+.goya-text p {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--c-ink);
+  max-width: 700px;
+}
+.goya-text p + p { margin-top: 14px; }
+
+/* ============= PAGE 9 — ILLUSTRATIONS GRID ============= */
+.page-illus {
+  min-height: 100vh;
+  padding: 100px 80px;
+  background: var(--c-lavender);
+  position: relative;
+}
+.page-illus .section-label { color: #fff; }
+.illus-title {
+  font-family: 'Parisienne', cursive;
+  font-size: 140px;
+  color: #fff;
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 40px;
+  mix-blend-mode: overlay;
+}
+.illus-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.illus {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: zoom-in;
+  transition: transform 0.4s cubic-bezier(.34,1.56,.64,1), z-index 0s 0.4s;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.illus img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s;
+}
+.illus:hover {
+  transform: scale(1.15);
+  z-index: 10;
+  transition: transform 0.4s cubic-bezier(.34,1.56,.64,1), z-index 0s;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+}
+.illus:hover img { transform: scale(1.1); }
+/* scans of the first row that came in upside down — flip visually */
+.illus-3 img, .illus-4 img { transform: rotate(180deg); }
+.illus-3:hover img, .illus-4:hover img { transform: rotate(180deg) scale(1.1); }
+/* layout — asymmetric grid */
+.illus-1 { grid-column: 1/4; grid-row: 1/3; aspect-ratio: 3/4; }
+.illus-2 { grid-column: 4/8; grid-row: 1/2; aspect-ratio: 4/3; }
+.illus-3 { grid-column: 8/11; grid-row: 1/3; aspect-ratio: 3/4; }
+.illus-4 { grid-column: 11/13; grid-row: 1/2; aspect-ratio: 1/1; }
+.illus-5 { grid-column: 4/6; grid-row: 2/3; aspect-ratio: 1/1; }
+.illus-6 { grid-column: 6/8; grid-row: 2/3; aspect-ratio: 1/1; }
+.illus-7 { grid-column: 11/13; grid-row: 2/3; aspect-ratio: 1/1; }
+.illus-8 { grid-column: 1/5; grid-row: 3/4; aspect-ratio: 4/3; }
+.illus-9 { grid-column: 5/9; grid-row: 3/4; aspect-ratio: 4/3; }
+.illus-10 { grid-column: 9/13; grid-row: 3/5; aspect-ratio: 3/4; }
+
+/* ============= CONTACT FOOTER ============= */
+.page-contact {
+  padding: 120px 80px 80px;
+  background: var(--c-ink);
+  color: var(--c-cream);
+  position: relative;
+  overflow: hidden;
+}
+.contact-title {
+  font-family: 'Parisienne', cursive;
+  font-size: clamp(80px, 12vw, 200px);
+  color: var(--c-pink);
+  line-height: 0.9;
+  margin-bottom: 40px;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 60px;
+  align-items: end;
+}
+.contact-info p {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+.contact-info a {
+  color: var(--c-lavender);
+  text-decoration: none;
+  border-bottom: 1px solid var(--c-lavender);
+  transition: all 0.3s;
+}
+.contact-info a:hover { color: var(--c-pink); border-color: var(--c-pink); }
+.contact-meta {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  color: rgba(254,255,205,0.5);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* Text selection */
+::selection { background: var(--c-pink); color: var(--c-ink); }
+
+/* ========== TABLET (≤900px) ========== */
+@media (max-width: 900px) {
+  .nav { padding: 0 20px; }
+  .page-landing, .page-menu, .page-about, .page-book, .page-tshirts, .page-goyacha, .page-illus, .page-contact { padding-left: 24px; padding-right: 24px; }
+
+  .orchid-stage { width: 50vw; opacity: 0.6; }
+  .landing-sub { margin-left: 0; }
+
+  .page-menu { flex-direction: column; gap: 24px; }
+  .menu-label { position: relative; left: 0; top: 0; width: 100%; margin-bottom: 0; text-align: center; }
+  .menu-label ol { display: inline-block; text-align: left; }
+
+  .page-about { grid-template-columns: 1fr; gap: 40px; }
+
+  .book { width: 100%; max-width: 720px; height: auto; aspect-ratio: 820/560; }
+
+  .tshirt { width: 390px; }
+
+  .goyacha-grid { grid-template-columns: 1fr 1fr; }
+  .goya-hero { grid-column: 1 / 3; grid-row: auto; aspect-ratio: 16/10; transform: none; }
+  .goya-mockup { grid-column: auto !important; }
+  .goya-text { grid-column: 1 / 3; }
+
+  .illus-grid { grid-template-columns: repeat(6, 1fr); }
+  .illus-1, .illus-2, .illus-3, .illus-4, .illus-5, .illus-6, .illus-7, .illus-8, .illus-9, .illus-10 {
+    grid-column: span 3; grid-row: auto; aspect-ratio: 1/1;
+  }
+
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-meta { text-align: left; }
+}
+
+/* ========== PHONE (≤600px) ========== */
+@media (max-width: 600px) {
+  .nav { padding: 0 14px; height: 56px; }
+  .nav a, .nav .navlink { font-size: 15px; }
+  .nav .logo { font-size: 22px; }
+
+  /* landing */
+  .page-landing { padding: 90px 20px 24px; }
+  .page-landing::before { inset: 14px; }
+  .landing-title { font-size: clamp(60px, 20vw, 130px); }
+  .landing-sub { font-size: clamp(18px, 4.8vw, 24px); margin-left: 0; }
+  .orchid-stage { width: 58vw; opacity: 0.35; }
+  .orchid-stage-left { width: 55vw; opacity: 0.25; }
+  .landing-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .landing-footer .year { font-size: 28px; }
+  .landing-footer .name { text-align: left; }
+  .landing-footer .name span { font-size: 30px; }
+  .scroll-hint { font-size: 15px; bottom: 18px; }
+
+  /* section labels */
+  .section-label { font-size: 22px; padding: 30px 20px 0; }
+
+  /* menu keychain — shrunk to fit */
+  .page-menu { padding: 80px 16px 30px; }
+  .menu-label h3 { font-size: 36px; margin-bottom: 12px; }
+  .menu-label { font-size: 20px; line-height: 1.6; }
+  .menu-stage { width: 320px; height: 320px; }
+  .menu-caption { font-size: 18px; bottom: 16px; }
+  .astro-head { width: 100px; height: 100px; top: 0; }
+  .astro-head::before { inset: auto; width: 26px; height: 26px; }
+  .astro-piece img, .astro-piece .placeholder { width: 92px; height: 116px; border-radius: 8px; }
+  .astro-piece::before { width: 12px; height: 12px; top: -8px; border-width: 2px; }
+  .astro-piece::after { top: -18px; height: 14px; }
+  /* default — bundled */
+  .piece-1 { transform: translate(calc(-50% - 28px), calc(-50% - 18px)) rotate(-14deg); }
+  .piece-2 { transform: translate(calc(-50% - 13px), calc(-50% - 18px)) rotate(-6deg); }
+  .piece-3 { transform: translate(-50%, calc(-50% - 18px)) rotate(0deg); }
+  .piece-4 { transform: translate(calc(-50% + 13px), calc(-50% - 18px)) rotate(6deg); }
+  .piece-5 { transform: translate(calc(-50% + 28px), calc(-50% - 18px)) rotate(14deg); }
+  /* hover — fan */
+  .astro.hover .piece-1 { transform: translate(calc(-50% - 95px), calc(-50% - 72px)) rotate(32deg); }
+  .astro.hover .piece-2 { transform: translate(calc(-50% - 55px), calc(-50% - 32px)) rotate(16deg); }
+  .astro.hover .piece-3 { transform: translate(-50%, calc(-50% - 18px)) rotate(0deg); }
+  .astro.hover .piece-4 { transform: translate(calc(-50% + 55px), calc(-50% - 32px)) rotate(-16deg); }
+  .astro.hover .piece-5 { transform: translate(calc(-50% + 95px), calc(-50% - 72px)) rotate(-32deg); }
+
+  /* about — polaroids */
+  .page-about { padding: 60px 20px; gap: 30px; }
+  .polaroid-stack { height: 360px; }
+  .polaroid { width: 220px; height: 280px; padding: 14px 14px 54px; }
+  .polaroid:nth-child(1) { left: 4%; top: 10px; transform: rotate(-6deg); }
+  .polaroid:nth-child(2) { left: 36%; top: 60px; transform: rotate(5deg); }
+  .polaroid .caption { font-size: 20px; bottom: 14px; }
+  .about-text h2 { font-size: clamp(52px, 14vw, 80px); margin-bottom: 20px; gap: 8px; }
+  .about-text h2 .big-a { font-size: clamp(78px, 22vw, 120px); }
+  .about-text .bio { padding: 20px 22px; font-size: 15px; }
+
+  /* print / photo tracks */
+  .print-track { padding: 40px 20px; gap: 20px; }
+  .print-card,
+  .print-card[style] { width: 240px !important; height: 340px !important; }
+
+  /* book */
+  .page-book { padding: 50px 16px; }
+  .book-label { font-size: 26px; top: 14px; left: 14px; }
+  .book-label.right { right: 14px; }
+  .book-hint { font-size: 15px; margin-top: 24px; text-align: center; }
+  .book-index { font-size: 12px; }
+  .book-nav button { padding: 8px 16px; font-size: 14px; }
+
+  /* tshirts */
+  .page-tshirts { gap: 32px; padding: 50px 20px; flex-wrap: wrap; }
+  .tshirt { width: 82%; max-width: 300px; }
+  .tshirt:nth-child(1), .tshirt:nth-child(2), .tshirt:nth-child(3) { transform: none; }
+  .tshirt:nth-child(1):hover { transform: translateY(-8px) rotate(-2deg); }
+  .tshirt:nth-child(2):hover { transform: translateY(-14px); }
+  .tshirt:nth-child(3):hover { transform: translateY(-8px) rotate(2deg); }
+
+  /* goyacha — 1 column */
+  .page-goyacha { padding: 60px 20px; }
+  .goyacha-grid { grid-template-columns: 1fr; gap: 20px; }
+  .goya-hero { grid-column: 1 !important; grid-row: auto; aspect-ratio: 3/4; transform: none; }
+  .goya-mockup { grid-column: 1 !important; }
+  .goya-text { grid-column: 1; padding: 22px; margin-top: 16px; }
+  .goya-text h3 { font-size: clamp(30px, 7vw, 42px); }
+  .goya-text p { font-size: 15px; }
+
+  /* illustrations — 2 columns */
+  .page-illus { padding: 60px 20px; }
+  .illus-title { font-size: clamp(60px, 18vw, 90px); margin-bottom: 20px; }
+  .illus-grid { gap: 12px; grid-template-columns: repeat(2, 1fr); }
+  .illus-1, .illus-2, .illus-3, .illus-4, .illus-5, .illus-6, .illus-7, .illus-8, .illus-9, .illus-10 {
+    grid-column: span 1; grid-row: auto; aspect-ratio: 1/1;
+  }
+
+  /* photo track arrows */
+  .track-arrow { width: 42px; height: 42px; font-size: 26px; line-height: 36px; }
+  .track-arrow-left { left: 10px; }
+  .track-arrow-right { right: 10px; }
+
+  /* contact */
+  .page-contact { padding: 80px 20px 60px; }
+  .contact-title { font-size: clamp(60px, 18vw, 100px); margin-bottom: 28px; }
+  .contact-info p { font-size: 20px; }
+
+  /* lightbox — override inline close button */
+  #lightbox-close { top: 12px !important; right: 16px !important; font-size: 36px !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="nav">
+  <a href="#menu">menu</a>
+  <a href="#travaux" class="logo">travaux</a>
+  <a href="#contact">contacts</a>
+</nav>
+
+<!-- ========== PAGE 1 — LANDING ========== -->
+<section class="page-landing">
+  <div class="orchid-stage">
+    <img src="assets/lys-cutout.png" alt="Lys">
+  </div>
+  <div></div>
+  <div>
+    <h1 class="landing-title"><span class="p-letter">P</span>ortfolio</h1>
+    <p class="landing-sub">design graphique &amp; illustration</p>
+  </div>
+  <div class="landing-footer">
+    <span class="year">2026</span>
+    <div class="name">
+      <span>Maïlys</span>
+      <span style="font-family:'Fraunces',serif; font-size:22px; color:var(--c-pink); letter-spacing:0.2em; text-transform:uppercase;">Honorien</span>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ faites défiler pour explorer</div>
+</section>
+
+<!-- ========== PAGE 2 — MENU ========== -->
+<section class="page-menu" id="menu">
+  <div class="orchid-stage-left">
+    <img src="assets/orchid-cutout.png" alt="Orchidée">
+  </div>
+  <div class="menu-label">
+    <h3>menu</h3>
+    <ol>
+      <li><a href="#about" style="color:inherit; text-decoration:none;">à propos de moi</a></li>
+      <li><a href="#print-scol" style="color:inherit; text-decoration:none;">print &amp; projets scolaires</a></li>
+      <li><a href="#print-perso" style="color:inherit; text-decoration:none;">print &amp; projets persos</a></li>
+      <li><a href="#design-tshirt" style="color:inherit; text-decoration:none;">design t-shirt</a></li>
+      <li><a href="#illustration" style="color:inherit; text-decoration:none;">illustration</a></li>
+      <li><a href="#photographie" style="color:inherit; text-decoration:none;">photographie</a></li>
+    </ol>
+  </div>
+
+  <div class="menu-stage">
+    <div class="astro" id="astro">
+      <div class="astro-head"></div>
+      <a href="#about" class="astro-piece piece-1">
+        <img src="assets/affiche-parfum.jpg" alt="À propos">
+        <span class="label">à propos</span>
+      </a>
+      <a href="#print-scol" class="astro-piece piece-2">
+        <img src="assets/affiche-fresh.jpg" alt="Print scolaires">
+        <span class="label">print scolaires</span>
+      </a>
+      <a href="#print-perso" class="astro-piece piece-3">
+        <img src="assets/tshirt1.png" alt="Print persos" style="background:#fff;">
+        <span class="label">print persos</span>
+      </a>
+      <a href="#illustration" class="astro-piece piece-4">
+        <img src="assets/dessin7.png" alt="Illustration">
+        <span class="label">illustration</span>
+      </a>
+      <a href="#photographie" class="astro-piece piece-5">
+        <img src="assets/blurred-i.png" alt="Photographie">
+        <span class="label">photographie</span>
+      </a>
+    </div>
+  </div>
+  <div class="menu-caption">↓ faites défiler pour explorer</div>
+</section>
+
+<!-- ========== PAGE 3 — À PROPOS ========== -->
+<p class="section-label" id="travaux">↳ 1. à propos de moi</p>
+<section class="page-about" id="about">
+  <div class="polaroid-stack" id="polaroid-stack">
+    <div class="polaroid" data-i="0">
+      <img src="assets/govacha.jpg" alt="Photo 1">
+      <div class="caption">goya ✿</div>
+      <svg class="sticker" viewBox="0 0 100 100">
+        <path d="M50,5 L58,35 L90,35 L64,55 L74,85 L50,65 L26,85 L36,55 L10,35 L42,35 Z" fill="#BCC2F4" stroke="#2a2438" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="polaroid" data-i="1">
+      <img src="assets/backpicture.jpg" alt="Photo 2">
+      <div class="caption">self portrait</div>
+    </div>
+  </div>
+  <div class="about-text">
+    <h2><span class="big-a">À</span> propos de moi</h2>
+    <div class="bio">
+      <p>Je suis <strong>Mai True</strong>, designer graphique &amp; illustratrice basée entre deux cafés et un carnet de croquis. Je travaille l'image comme une matière vivante — mélange de <strong>print, collage, typo sensible et dessin</strong> — avec une affection particulière pour les fleurs, les textures granuleuses et les titres qui prennent toute la place.</p>
+      <p style="margin-top:14px;">Mes projets naviguent entre affiches, éditions, identités visuelles et illustrations perso. J'aime les concepts qui se respirent plutôt que se lisent, et les systèmes qui laissent respirer le désordre.</p>
+      <p style="margin-top:14px; font-style: italic; color: var(--c-pink-deep);">« bloom with grace, even in the quietest moment. »</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PAGE 4 — PRINT SCOLAIRES (MYTHOS book) ========== -->
+<p class="section-label" id="print-scol">↳ 2. print &amp; projets scolaires</p>
+<section class="page-book">
+  <div class="book" id="book">
+    <div class="book-page left">
+      <span class="book-label">Mytho</span>
+      <img src="assets/mockup-mythos.jpg" alt="Mytho cover">
+    </div>
+    <div class="book-page right" id="book-right">
+      <div class="front">
+        <span class="book-label right" style="color:#fff;">#01</span>
+        <img src="assets/mockup-mythos2.jpg" alt="Mytho spread" id="book-front-img">
+      </div>
+      <div class="back">
+        <img src="assets/mockup-bd.png" alt="BD spread" id="book-back-img">
+      </div>
+    </div>
+    <div class="book-spine"></div>
+  </div>
+  <div class="book-nav">
+    <button id="prev-page">← précédent</button>
+    <button id="next-page">tourner la page →</button>
+  </div>
+  <div class="book-index" id="book-index">01 / 03 — MYTHO magazine</div>
+  <div class="book-hint">✦ cliquez la page pour la tourner</div>
+</section>
+
+<!-- ========== PAGE 5 — PRINT PERSOS (affiches) ========== -->
+<p class="section-label" id="print-perso">↳ 3. print &amp; projets persos</p>
+<section class="page-print">
+  <div class="print-track" id="print-track">
+    <div class="print-card">
+      <img src="assets/affiche-changes.jpg" alt="Changes">
+      <div class="meta"><b>Changes</b>affiche / 2025</div>
+    </div>
+    <div class="print-card">
+      <img src="assets/affiche-coree.jpg" alt="Be my Flower">
+      <div class="meta"><b>Be my Flower</b>affiche / 2025</div>
+    </div>
+    <div class="print-card">
+      <img src="assets/affiche-design.jpg" alt="Never Stop Thinking">
+      <div class="meta"><b>Never Stop</b>éditorial / 2026</div>
+    </div>
+    <div class="print-card">
+      <img src="assets/affiche-fresh.jpg" alt="Fresh">
+      <div class="meta"><b>Fresh</b>affiche / 2025</div>
+    </div>
+    <div class="print-card">
+      <img src="assets/affiche-parfum.jpg" alt="Parfum">
+      <div class="meta"><b>Musée du Parfum</b>identité / 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PAGE 6 — TSHIRTS ========== -->
+<p class="section-label" id="design-tshirt">↳ 4. design t-shirt</p>
+<section class="page-tshirts">
+  <div class="tshirt" data-zoom="assets/tshirt1.png">
+    <img src="assets/tshirt1.png" alt="Tshirt 1">
+    <div class="tag">Arirang — 01</div>
+  </div>
+  <div class="tshirt" data-zoom="assets/tshirt2.png">
+    <img src="assets/tshirt2.png" alt="Tshirt 2">
+    <div class="tag">Malcolm Todd — 02</div>
+  </div>
+  <div class="tshirt" data-zoom="assets/tshirt3.png">
+    <img src="assets/tshirt3.png" alt="Tshirt 3">
+    <div class="tag">Claro Charm — 03</div>
+  </div>
+</section>
+
+<!-- ========== PAGE 7/8 — GOYACHA ========== -->
+<section class="page-goyacha">
+  <div class="goyacha-grid">
+    <div class="goya-hero">
+      <span class="tag">GOYACHA — 2026</span>
+      <img src="assets/govacha.jpg" alt="Goyacha branding">
+    </div>
+    <div class="goya-mockup">
+      <img src="assets/govacha-canette.png" alt="Canette mockup">
+    </div>
+    <div class="goya-mockup">
+      <img src="assets/invader.png" alt="Invader cover">
+    </div>
+    <div class="goya-mockup" style="grid-column: 2 / 3;">
+      <img src="assets/mockup-bd.png" alt="BD mockup">
+    </div>
+    <div class="goya-mockup" style="grid-column: 3 / 4;">
+      <img src="assets/mockup-mythos.jpg" alt="Mythos mockup">
+    </div>
+
+    <div class="goya-text">
+      <h3>Goyacha — identité boisson matcha</h3>
+      <p>Projet d'identité visuelle complet pour <strong>Goyacha</strong>, une marque de thé matcha pétillant. L'univers s'appuie sur une mascotte chat-matcha, une typographie graffiti et une palette chromatique douce-acide qui tranche avec les codes habituels du matcha japonais.</p>
+      <p>Livré : logotype, brandmark, trois déclinaisons canette (matcha, fraise, mangue), tote bag, signalétique et tablier. Le tout construit autour d'un système modulaire qui permet à la marque de se déployer sur de nouveaux parfums sans refonte.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PAGE 9 — ILLUSTRATIONS ========== -->
+<p class="section-label" id="illustration" style="background:var(--c-lavender); color:#fff; margin:0; padding: 80px 80px 0;">↳ 5. illustration</p>
+<section class="page-illus">
+  <h2 class="illus-title">illustrations</h2>
+  <div class="illus-grid">
+    <div class="illus illus-1"><img src="assets/dessin1.png" alt="illu 1"></div>
+    <div class="illus illus-2"><img src="assets/dessin2.png" alt="illu 2"></div>
+    <div class="illus illus-3"><img src="assets/dessin3.png" alt="illu 3"></div>
+    <div class="illus illus-4"><img src="assets/dessin4.png" alt="illu 4"></div>
+    <div class="illus illus-5"><img src="assets/dessin5.png" alt="illu 5"></div>
+    <div class="illus illus-6"><img src="assets/dessin6.png" alt="illu 6"></div>
+    <div class="illus illus-7"><img src="assets/dessin7.png" alt="illu 7"></div>
+    <div class="illus illus-8"><img src="assets/dessin8.png" alt="illu 8"></div>
+    <div class="illus illus-9"><img src="assets/dessin9.png" alt="illu 9"></div>
+    <div class="illus illus-10"><img src="assets/dessin10.png" alt="illu 10"></div>
+  </div>
+</section>
+
+<!-- ========== PHOTOGRAPHIE ========== -->
+<p class="section-label" id="photographie" style="padding-top:80px;">↳ 6. photographie</p>
+<section class="page-print track-wrap" style="padding-bottom:80px;">
+  <button class="track-arrow track-arrow-left" id="photo-prev" aria-label="Photo précédente">‹</button>
+  <button class="track-arrow track-arrow-right" id="photo-next" aria-label="Photo suivante">›</button>
+  <div class="print-track" id="photo-track">
+    <div class="print-card" style="width:380px;">
+      <img src="assets/backpicture.jpg" alt="Ivy back">
+      <div class="meta"><b>Ivy back</b>argentique / 2025</div>
+    </div>
+    <div class="print-card" style="width:300px; height:400px;">
+      <img src="assets/blurred-eye.png" alt="Blur eye">
+      <div class="meta"><b>Blur — eye</b>argentique / 2025</div>
+    </div>
+    <div class="print-card" style="width:320px; height:440px;">
+      <img src="assets/blurred-i.png" alt="Blur window">
+      <div class="meta"><b>Blur — window</b>argentique / 2025</div>
+    </div>
+    <div class="print-card" style="width:340px; height:460px;">
+      <img src="assets/photo-chaussettes.png" alt="Chaussettes japonaises">
+      <div class="meta"><b>Tabi shop</b>argentique / 2026</div>
+    </div>
+    <div class="print-card" style="width:340px; height:460px;">
+      <img src="assets/photo-magasin.png" alt="Magasin japonais">
+      <div class="meta"><b>Atelier Gâteaux</b>argentique / 2026</div>
+    </div>
+    <div class="print-card" style="width:340px; height:460px;">
+      <img src="assets/photo-shop.png" alt="Boutique textiles">
+      <div class="meta"><b>Textiles</b>argentique / 2026</div>
+    </div>
+    <div class="print-card" style="width:300px; height:420px;">
+      <img src="assets/photo-portrait.png" alt="Autoportrait">
+      <div class="meta"><b>Self — mirror</b>argentique / 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section class="page-contact" id="contact">
+  <h2 class="contact-title">contacts</h2>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p><a href="mailto:mai.true@portfolio.fr">mai.true@portfolio.fr</a></p>
+      <p><a href="#">@goyaangii</a> — instagram</p>
+      <p><a href="#">@maitrue</a> — behance</p>
+    </div>
+    <div class="contact-meta">
+      © 2026 — Mai True<br>
+      design &amp; illustration<br>
+      Paris / monde
+    </div>
+  </div>
+</section>
+
+<!-- ========== LIGHTBOX ========== -->
+<div id="lightbox" style="position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:3000;display:none;align-items:center;justify-content:center;cursor:zoom-out;opacity:0;transition:opacity .35s;">
+  <img id="lightbox-img" src="" alt="" style="max-width:92vw;max-height:92vh;transform:scale(.85);transition:transform .45s cubic-bezier(.34,1.56,.64,1);box-shadow:0 40px 120px rgba(0,0,0,.6);border-radius:6px;">
+  <button id="lightbox-close" style="position:absolute;top:24px;right:32px;background:none;border:none;color:#fff;font-size:48px;font-family:'Fraunces',serif;cursor:pointer;line-height:1;">×</button>
+</div>
+
+<script>
+// ============= MENU ASTRONAUT HOVER =============
+const astro = document.getElementById('astro');
+astro.addEventListener('mouseenter', () => astro.classList.add('hover'));
+astro.addEventListener('mouseleave', () => astro.classList.remove('hover'));
+
+// ============= POLAROID STACK =============
+const stack = document.getElementById('polaroid-stack');
+const polaroids = stack.querySelectorAll('.polaroid');
+polaroids.forEach(p => {
+  p.addEventListener('mouseenter', () => {
+    if (p.dataset.i === "0") p.classList.add('slide-left');
+    else p.classList.add('slide-right');
+  });
+  p.addEventListener('mouseleave', () => {
+    p.classList.remove('slide-left', 'slide-right');
+  });
+});
+
+// ============= BOOK =============
+const bookRight = document.getElementById('book-right');
+const bookFront = document.getElementById('book-front-img');
+const bookBack = document.getElementById('book-back-img');
+const leftImg = document.querySelector('.book-page.left img');
+const leftLabel = document.querySelector('.book-page.left .book-label');
+const bookIndex = document.getElementById('book-index');
+const spreads = [
+  { left: 'assets/mockup-mythos.jpg', right: 'assets/mockup-mythos2.jpg', label: 'Mytho', title: 'MYTHO magazine' },
+  { left: 'assets/bd1.jpg', right: 'assets/bd2.jpg', label: 'BD', title: 'BD — voyage spatial' },
+];
+let spreadIdx = 0;
+let flipping = false;
+
+function updateBook() {
+  leftImg.src = spreads[spreadIdx].left;
+  leftLabel.textContent = spreads[spreadIdx].label;
+  bookFront.src = spreads[spreadIdx].right;
+  const nextIdx = (spreadIdx + 1) % spreads.length;
+  bookBack.src = spreads[nextIdx].left;
+  bookIndex.textContent = `0${spreadIdx + 1} / 0${spreads.length} — ${spreads[spreadIdx].title}`;
+  document.getElementById('next-page').disabled = (spreadIdx === spreads.length - 1);
+  document.getElementById('prev-page').disabled = (spreadIdx === 0);
+}
+
+function nextPage() {
+  if (flipping || spreadIdx >= spreads.length - 1) return;
+  flipping = true;
+  bookRight.classList.add('flipped');
+  setTimeout(() => {
+    spreadIdx = spreadIdx + 1;
+    bookRight.classList.remove('flipped');
+    updateBook();
+    flipping = false;
+  }, 1000);
+}
+function prevPage() {
+  if (flipping || spreadIdx <= 0) return;
+  spreadIdx = spreadIdx - 1;
+  updateBook();
+}
+bookRight.addEventListener('click', nextPage);
+document.getElementById('next-page').addEventListener('click', nextPage);
+document.getElementById('prev-page').addEventListener('click', prevPage);
+updateBook();
+
+// ============= LIGHTBOX (tshirts + illustrations) =============
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxClose = document.getElementById('lightbox-close');
+function openLightbox(src, rotate = 0) {
+  lightboxImg.src = src;
+  lightbox.style.display = 'flex';
+  requestAnimationFrame(() => {
+    lightbox.style.opacity = '1';
+    lightboxImg.style.transform = `scale(1) rotate(${rotate}deg)`;
+  });
+}
+function closeLightbox() {
+  lightbox.style.opacity = '0';
+  lightboxImg.style.transform = 'scale(.85)';
+  setTimeout(() => { lightbox.style.display = 'none'; }, 350);
+}
+lightbox.addEventListener('click', closeLightbox);
+lightboxClose.addEventListener('click', e => { e.stopPropagation(); closeLightbox(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+document.querySelectorAll('.tshirt').forEach(t => {
+  t.addEventListener('click', () => openLightbox(t.dataset.zoom));
+});
+document.querySelectorAll('.illus').forEach(i => {
+  i.addEventListener('click', () => {
+    const img = i.querySelector('img');
+    if (!img) return;
+    const flipped = i.classList.contains('illus-3') || i.classList.contains('illus-4');
+    openLightbox(img.src, flipped ? 180 : 0);
+  });
+});
+
+// ============= PHOTO TRACK ARROWS =============
+const photoTrack = document.getElementById('photo-track');
+const photoStep = 380;
+document.getElementById('photo-prev').addEventListener('click', () => {
+  photoTrack.scrollBy({ left: -photoStep, behavior: 'smooth' });
+});
+document.getElementById('photo-next').addEventListener('click', () => {
+  photoTrack.scrollBy({ left: photoStep, behavior: 'smooth' });
+});
+
+// ============= NAV SHOW/HIDE ON SCROLL =============
+let lastScroll = 0;
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y > 100 && y > lastScroll) {
+    nav.style.transform = 'translateY(-100%)';
+  } else {
+    nav.style.transform = 'translateY(0)';
+  }
+  lastScroll = y;
+});
+nav.style.transition = 'transform 0.4s ease';
+</script>
+</body>
+</html>
