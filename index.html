@@ -547,48 +547,81 @@ body { min-height: 100vh; }
   width: 820px;
   height: 560px;
   position: relative;
-  perspective: 2000px;
+  perspective: 2400px;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.18));
 }
 .book-spine {
   position: absolute;
   left: 50%;
   top: 0; bottom: 0;
-  width: 2px;
-  background: rgba(42,36,56,0.2);
+  width: 4px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.18), rgba(0,0,0,0.28) 50%, rgba(0,0,0,0.18));
   transform: translateX(-50%);
   z-index: 5;
+  pointer-events: none;
 }
 .book-page {
   position: absolute;
   top: 0; bottom: 0;
   width: 50%;
-  background: #fffef0;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  background-color: #fffef0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
-.book-page.left { left: 0; }
+.book-page.left {
+  left: 0;
+  box-shadow: inset -14px 0 30px rgba(0,0,0,0.12);
+}
 .book-page.right {
   right: 0;
   transform-origin: left center;
-  transition: transform 1s cubic-bezier(.45,.05,.55,.95);
+  transform-style: preserve-3d;
+  transition: transform 1.1s cubic-bezier(.55,.04,.33,1);
   cursor: pointer;
   z-index: 2;
+  box-shadow: inset 14px 0 30px rgba(0,0,0,0.12), 0 20px 50px rgba(0,0,0,0.18);
 }
-.book-page.right.flipped { transform: rotateY(-170deg); }
-.book-page img {
-  width: 100%; height: 100%;
-  object-fit: cover;
+.book-page.right.flipped {
+  transform: rotateY(-172deg);
+  box-shadow: -20px 20px 50px rgba(0,0,0,0.35);
 }
+.book-page .front,
 .book-page .back {
   position: absolute;
   inset: 0;
-  transform: rotateY(180deg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   backface-visibility: hidden;
-  background: #fffef0;
 }
-.book-page .front { backface-visibility: hidden; }
-.book-page .front img { position: absolute; inset: 0; }
-.book-page .back img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.book-page .back {
+  transform: rotateY(180deg);
+  box-shadow: inset -14px 0 30px rgba(0,0,0,0.12);
+}
+/* shadow sweep during flip — lives on front, fades in while page turns */
+.book-page.right .front::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(270deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 50%);
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  pointer-events: none;
+}
+.book-page.right.flipping .front::after { opacity: 1; }
+/* highlight on the back side as it swings into view */
+.book-page.right .back::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 40%);
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  pointer-events: none;
+}
+.book-page.right.flipping .back::after { opacity: 1; }
 .book-label {
   position: absolute;
   font-family: 'Parisienne', cursive;
@@ -1154,19 +1187,27 @@ html { scroll-behavior: smooth; }
   </div>
 </section>
 
-<!-- ========== PAGE 4 — PRINT SCOLAIRES ========== -->
+<!-- ========== PAGE 4 — PRINT SCOLAIRES (book) ========== -->
 <p class="section-label" id="print-scol">↳ 2. print &amp; projets scolaires</p>
-<section class="page-print">
-  <div class="print-track" id="print-scol-track">
-    <div class="print-card"><img src="assets/cassandre-1.png" alt="Cassandre cover"></div>
-    <div class="print-card"><img src="assets/cassandre-2.png" alt="Cassandre double page"></div>
-    <div class="print-card"><img src="assets/print-bb.png" alt="Print Bb"></div>
-    <div class="print-card"><img src="assets/affiche-parfum.jpg" alt="Musée du Parfum"></div>
-    <div class="print-card"><img src="assets/kakemono.png" alt="Kakémono"></div>
-    <div class="print-card"><img src="assets/francetv-1.png" alt="France TV 1"></div>
-    <div class="print-card"><img src="assets/francetv-2.jpg" alt="France TV 2"></div>
-    <div class="print-card"><img src="assets/francetv-3.png" alt="France TV 3"></div>
+<section class="page-book">
+  <div class="book" id="book">
+    <div class="book-page left" id="book-left">
+      <span class="book-label" id="book-left-label"></span>
+    </div>
+    <div class="book-page right" id="book-right">
+      <div class="front" id="book-front">
+        <span class="book-label right" id="book-right-label" style="color:#fff;"></span>
+      </div>
+      <div class="back" id="book-back"></div>
+    </div>
+    <div class="book-spine"></div>
   </div>
+  <div class="book-nav">
+    <button id="prev-page">← précédent</button>
+    <button id="next-page">tourner la page →</button>
+  </div>
+  <div class="book-index" id="book-index"></div>
+  <div class="book-hint">✦ cliquez la page droite pour la tourner</div>
 </section>
 
 <!-- ========== PAGE 5 — PRINT PERSOS ========== -->
@@ -1208,9 +1249,6 @@ html { scroll-behavior: smooth; }
       <img src="assets/govacha-canette.png" alt="Canette mockup">
     </div>
     <div class="goya-mockup">
-      <img src="assets/invader.png" alt="Invader cover">
-    </div>
-    <div class="goya-mockup" style="grid-column: 2 / 4;">
       <img src="assets/matcha-can-2.png" alt="Matcha can 2">
     </div>
 
@@ -1323,6 +1361,90 @@ polaroids.forEach(p => {
     p.classList.remove('slide-left', 'slide-right');
   });
 });
+
+// ============= BOOK (print scolaires) =============
+const spreads = [
+  { left: 'assets/cassandre-1.png', right: 'assets/cassandre-2.png', label: 'Cassandre', title: 'Cassandre — magazine' },
+  { left: 'assets/print-bb.png',    right: 'assets/affiche-parfum.jpg', label: 'Print',     title: 'Bb & Musée du Parfum' },
+  { left: 'assets/kakemono.png',    right: 'assets/francetv-1.png',     label: 'Kakémono',  title: 'Kakémono / France TV' },
+  { left: 'assets/francetv-2.jpg',  right: 'assets/francetv-3.png',     label: 'France TV', title: 'France TV — campagne' },
+  { double: 'assets/mockup-mythos2.jpg',                                label: 'Mythos',    title: 'MYTHOS — double page' },
+];
+
+const bookLeft       = document.getElementById('book-left');
+const bookFront      = document.getElementById('book-front');
+const bookBack       = document.getElementById('book-back');
+const bookRight      = document.getElementById('book-right');
+const bookLeftLabel  = document.getElementById('book-left-label');
+const bookRightLabel = document.getElementById('book-right-label');
+const bookIndex      = document.getElementById('book-index');
+const nextBtn        = document.getElementById('next-page');
+const prevBtn        = document.getElementById('prev-page');
+
+let spreadIdx = 0;
+let flipping = false;
+
+function setBg(el, src, mode) {
+  el.style.backgroundImage = `url('${src}')`;
+  if (mode === 'left') {
+    el.style.backgroundSize = '200% 100%';
+    el.style.backgroundPosition = 'left center';
+  } else if (mode === 'right') {
+    el.style.backgroundSize = '200% 100%';
+    el.style.backgroundPosition = 'right center';
+  } else {
+    el.style.backgroundSize = 'cover';
+    el.style.backgroundPosition = 'center center';
+  }
+}
+function leftOf(s)      { return { src: s.double || s.left,  mode: s.double ? 'left'  : 'cover' }; }
+function rightOf(s)     { return { src: s.double || s.right, mode: s.double ? 'right' : 'cover' }; }
+
+function renderBook() {
+  const curr = spreads[spreadIdx];
+  const next = spreads[spreadIdx + 1];
+  const L = leftOf(curr), R = rightOf(curr);
+  setBg(bookLeft,  L.src, L.mode);
+  setBg(bookFront, R.src, R.mode);
+  // Back of flipping page = left of next spread (so verso ≠ recto during flip)
+  if (next) {
+    const NL = leftOf(next);
+    setBg(bookBack, NL.src, NL.mode);
+  } else {
+    bookBack.style.backgroundImage = 'none';
+  }
+  bookLeftLabel.textContent  = curr.label;
+  bookRightLabel.textContent = `#0${spreadIdx + 1}`;
+  bookIndex.textContent = `0${spreadIdx + 1} / 0${spreads.length} — ${curr.title}`;
+  nextBtn.disabled = (spreadIdx === spreads.length - 1);
+  prevBtn.disabled = (spreadIdx === 0);
+}
+
+function nextPage() {
+  if (flipping || spreadIdx >= spreads.length - 1) return;
+  flipping = true;
+  bookRight.classList.add('flipping');
+  bookRight.classList.add('flipped');
+  setTimeout(() => {
+    spreadIdx++;
+    bookRight.classList.remove('flipped');
+    // render new spread while the page is instantly reset (backface hidden means no visual jump)
+    renderBook();
+    setTimeout(() => {
+      bookRight.classList.remove('flipping');
+      flipping = false;
+    }, 50);
+  }, 1100);
+}
+function prevPage() {
+  if (flipping || spreadIdx <= 0) return;
+  spreadIdx--;
+  renderBook();
+}
+bookRight.addEventListener('click', nextPage);
+nextBtn.addEventListener('click', nextPage);
+prevBtn.addEventListener('click', prevPage);
+renderBook();
 
 // ============= LIGHTBOX (tshirts + illustrations) =============
 const lightbox = document.getElementById('lightbox');
